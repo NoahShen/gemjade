@@ -1,4 +1,4 @@
--module(gemjade_dbhelper).
+-module(gemjade_pointmgr).
 
 -author('Noah.Shen87@gmail.com').
 
@@ -15,7 +15,7 @@
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
          terminate/2, code_change/3]).
 
--export([get_point/1, put_point/1]).
+-export([get_point/1, put_point/1, remove_point/1]).
 
 %% @spec start_link() -> ServerRet
 start_link(State) ->
@@ -50,6 +50,9 @@ init(State) ->
 	mysql:prepare(update_point_sql,
 		<<"UPDATE point set longitude = ?, latitude = ?, longZone = ?, latZone = ?, utmLoc = GeomFromText(?) WHERE id = ?">>),
 
+	mysql:prepare(remove_point_sql,
+		<<"DELETE FROM point WHERE id = ?">>),
+
 	process_flag(trap_exit, true),
     {ok, #state{dboptions = Options}}.
 
@@ -59,6 +62,8 @@ handle_call(_Request, _From, State) ->
 			do_get_point(PointId);
 		{put_point, Point} ->
 			do_put_point(Point);
+		{remove_point, PointId} ->
+			do_remove_point(PointId);
 		_ ->
 			{error, "Bad request"}
 	end,
@@ -145,3 +150,18 @@ do_put_point_2(Point) ->
 		_ ->
 			Result
 	end.
+
+remove_point(PointId) ->
+	gen_server:call(?MODULE, {remove_point, PointId}).
+
+
+do_remove_point(PointId) ->
+	mysql:execute(p1, remove_point_sql, [PointId]).
+
+
+
+
+
+
+
+
