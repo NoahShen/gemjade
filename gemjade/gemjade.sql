@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2010-08-12 12:26:14
+Date: 2010-08-12 15:27:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,3 +33,4 @@ CREATE TABLE `point` (
 -- Records of point
 -- ----------------------------
 INSERT INTO `point` VALUES ('123', '121.443297', '31.221891', '51', 'R', '\0\0\0\0\0\0\0\0\0\0\0°wA\0\0\0€‚\\JA', 'user');
+INSERT INTO `point` VALUES ('1234', '121.443297', '31.221891', '51', 'R', '\0\0\0\0\0\0\0\0\0\0\0°wA\0\0\0€‚\\JA', 'user');

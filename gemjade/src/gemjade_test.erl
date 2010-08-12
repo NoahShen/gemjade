@@ -3,6 +3,9 @@
 %% for license see COPYING
 
 -module(gemjade_test).
+
+-include("gemjade.hrl").
+
 -compile(export_all).
 
 start() ->    
@@ -17,4 +20,16 @@ start() ->
     ok.
     
 get_point() ->
+	start(),
 	gemjade_dbhelper:get_point("123").
+
+put_point() ->
+	start(),
+	gemjade_dbhelper:put_point(#point{
+									id = "1234",
+									lon = 121.443297,
+									lat = 31.221891,
+									long_zone = "51",
+         							lat_zone = "R",
+		 							easting = 351724,
+		 							northing = 3455237}).
