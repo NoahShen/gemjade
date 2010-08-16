@@ -35,8 +35,9 @@ stop() ->
 dispatch(Req) ->
 	io:format("Req: ~p~n", [Req]),
 %%     error_logger:info_report([helloweb, {req, Req}]),
-	Path = Req:get(raw_path),
-	io:format("path: ~s~n", [Path]),
+	Path = Req:get(path),
+	Tokens = string:tokens(Path, "/"),
+	io:format("path: ~s ~s~n", Tokens),
 	QueryString = Req:parse_post(),
 	io:format("post: ~p~n", [QueryString]),
     Req:ok({"text/plain", "hello world"}).
