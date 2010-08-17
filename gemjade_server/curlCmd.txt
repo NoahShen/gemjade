@@ -1,1 +1,1 @@
-curl -d "a=b&b=c" http://localhost:8080/test/a.html
+curl -d "gemjade.action=subscribe&gemjade.node=root&gemjade.callback=http://www.google.com&gemjade.verify_token=Token" http://localhost:8080/subscribe
